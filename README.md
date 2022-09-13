@@ -1,0 +1,1 @@
+## ARIMA implementation with [Hannan-Rissanen algorithm](https://www.math-stat.unibe.ch/e237483/e237655/e243381/e281679/files281694/Chap15-17_ger.pdf)
