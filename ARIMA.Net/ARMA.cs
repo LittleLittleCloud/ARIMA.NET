@@ -112,14 +112,15 @@ namespace ARIMANet
 
         public virtual void Update(float x)
         {
-            if(this.p > 0)
+            var predict = this.Predict(1);
+
+            if (this.p > 0)
             {
                 this.prevX = this.prevX.Skip(1).Append(x);
             }
 
             if(this.q > 0)
             {
-                var predict = this.Predict(1);
                 this.prevZ = this.prevZ.Skip(1).Append(x - predict.First());
             }
         }
