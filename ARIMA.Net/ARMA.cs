@@ -42,7 +42,7 @@ namespace ARIMANet
             var trainData = this.context.Data.LoadFromEnumerable(inputs, schemaDefinition);
 
             Console.WriteLine($"start fitting ar({this.m})");
-            var pipeline = this.context.Regression.Trainers.LightGbm();
+            var pipeline = this.context.Regression.Trainers.Ols();
             var arMmodel = pipeline.Fit(trainData);
             var evalD = arMmodel.Transform(trainData);
             var predictY = evalD.GetColumn<float>("Score").ToArray();
@@ -54,7 +54,7 @@ namespace ARIMANet
             var _x = this.SlidingWindowView(x, this.p).TakeLast(_z.Count() + 1).SkipLast(1);
             var z = Enumerable.Zip(_x, _z).Select(x => x.First.Concat(x.Second).ToArray());
             var y = trainY.Skip(this.q);
-            var arModelPipeline = this.context.Regression.Trainers.Sdca();
+            var arModelPipeline = this.context.Regression.Trainers.Ols();
             schemaDefinition["Features"].ColumnType = new VectorDataViewType(NumberDataViewType.Single, this.p + this.q);
 
             inputs = Enumerable.Zip(z, y).Select(x => new RegressionInput

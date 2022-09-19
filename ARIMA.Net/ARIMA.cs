@@ -34,7 +34,7 @@ namespace ARIMANet
             if (this.d == 0)
             {
                 this.z = x;
-                base.Fit(x);
+                this.model.Fit(x);
             }
             else
             {
@@ -48,7 +48,7 @@ namespace ARIMANet
         {
             if(this.d == 0)
             {
-                return base.Predict(n);
+                return this.model.Predict(n);
             }
             else
             {
@@ -69,7 +69,7 @@ namespace ARIMANet
         {
             if(this.d == 0)
             {
-                base.Update(x);
+                this.model.Update(x);
             }
             else
             {
